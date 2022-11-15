@@ -41,6 +41,10 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
+  button:disabled {
+    cursor: not-allowed;
+  }
+
   ul, ol {
     list-style: none;
   }

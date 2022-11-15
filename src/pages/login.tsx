@@ -2,17 +2,29 @@ import type { NextPage } from 'next';
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
+import Input from '../components/Input';
+import useInput from '../hooks/useInput';
+import { validateId, validateInputs, validatePassword } from '../utilities/validator';
 
 const LoginPage: NextPage = () => {
+  const loginId = useInput('', validateId);
+  const loginPassword = useInput('', validatePassword);
+  const isValidLogin = validateInputs([loginId, loginPassword]);
+
   return (
     <>
       <Header />
       <Form>
-        <div>아이디</div>
-        <TextInput type='text' />
-        <div>비밀번호</div>
-        <TextInput type='password' />
-        <LoginButton disabled>로그인</LoginButton>
+        <Input labelFor='loginId' labelName='아이디' inputType='text' {...loginId} />
+        <Input
+          labelFor='loginPassword'
+          labelName='비밀번호'
+          inputType='password'
+          {...loginPassword}
+        />
+        <LoginButton type='submit' disabled={!isValidLogin}>
+          로그인
+        </LoginButton>
       </Form>
     </>
   );
@@ -20,15 +32,12 @@ const LoginPage: NextPage = () => {
 
 export default LoginPage;
 
-const Form = styled.div`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   margin-top: 40px;
   padding: 0 20px 40px;
-`;
-
-const TextInput = styled.input`
-  border: 1px solid #000;
+  gap: 16px;
 `;
 
 const LoginButton = styled.button`

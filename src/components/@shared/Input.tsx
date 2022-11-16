@@ -2,14 +2,14 @@ import { ChangeEventHandler, FocusEventHandler } from 'react';
 import styled, { css } from 'styled-components';
 import { ValidatorReturn } from '../../utilities/validator';
 
-type InputProps = {
+interface InputProps {
   labelFor: string;
   labelName: string;
   inputType: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   onBlur: FocusEventHandler<HTMLElement>;
   validatedInfo?: ValidatorReturn;
-};
+}
 
 type CheckIsValidProps = Partial<Pick<ValidatorReturn, 'isValidated'>>;
 

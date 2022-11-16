@@ -21,10 +21,10 @@ export default Header;
 const LoginInfo = () => {
   const { userName, setUserName } = useContext(UserNameContext);
   const userId = typeof window !== 'undefined' ? localStorage.getItem('userId') : null;
-  const { refetch } = useGetUserInfo(
+  const { refetch: refetchUserInfo } = useGetUserInfo(
     { userId: String(userId) },
     {
-      enabled: !userId,
+      enabled: false,
       onSuccess: ({ data }) => {
         const { NAME } = data.data.user;
         setUserName(NAME);
@@ -33,7 +33,9 @@ const LoginInfo = () => {
   );
 
   useEffect(() => {
-    refetch();
+    if (userId) {
+      refetchUserInfo();
+    }
   }, [userId]);
 
   const logout = () => {

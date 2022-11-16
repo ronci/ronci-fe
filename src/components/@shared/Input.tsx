@@ -1,6 +1,6 @@
 import { ChangeEventHandler, FocusEventHandler } from 'react';
 import styled, { css } from 'styled-components';
-import { ValidatorReturn } from '../utilities/validator';
+import { ValidatorReturn } from '../../utilities/validator';
 
 type InputProps = {
   labelFor: string;

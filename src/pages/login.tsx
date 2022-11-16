@@ -3,7 +3,7 @@ import { FormEventHandler, useContext } from 'react';
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
-import Input from '../components/Input';
+import Input from '../components/@shared/Input';
 import useInput from '../hooks/useInput';
 import { usePostLogin } from '../requestAPI';
 import { validateId, validateInputs, validatePassword } from '../utilities/validator';

@@ -31,3 +31,21 @@ export interface GetUserInfoResponse {
     };
   };
 }
+
+export interface GetProductListParams {
+  page: number;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  thumbnail: string;
+  price: number;
+}
+
+export interface GetProductListResponse {
+  data: {
+    products: Product[];
+    totalCount: number;
+  };
+}

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import setupMSW from '../api/setup';
 import GlobalStyle from '../styles/GlobalStyle';
+import { UserNameProvider } from '../provider/UserNameProvider';
 
 setupMSW();
 
@@ -19,11 +20,13 @@ const queryClient = new QueryClient({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <GlobalStyle />
-      <Background />
-      <Content>
-        <Component {...pageProps} />
-      </Content>
+      <UserNameProvider>
+        <GlobalStyle />
+        <Background />
+        <Content>
+          <Component {...pageProps} />
+        </Content>
+      </UserNameProvider>
     </QueryClientProvider>
   );
 }

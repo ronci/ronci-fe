@@ -36,11 +36,17 @@ const LoginInfo = () => {
     refetch();
   }, [userId]);
 
+  const logout = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('userId');
+    setUserName('');
+  };
+
   if (userName) {
     return (
       <FlexBox flexDirection='column' alignItems='flex-end'>
         <NameText>{userName}</NameText>
-        <button>logout</button>
+        <button onClick={logout}>logout</button>
       </FlexBox>
     );
   }

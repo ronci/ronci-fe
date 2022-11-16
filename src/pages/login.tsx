@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { FormEventHandler, useContext } from 'react';
+import { FormEventHandler, useContext, useEffect } from 'react';
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
@@ -12,7 +12,7 @@ import { UserNameContext } from '../provider/UserNameProvider';
 
 const LoginPage: NextPage = () => {
   const router = useRouter();
-  const { userName, setUserName } = useContext(UserNameContext);
+  const { setUserName } = useContext(UserNameContext);
   const loginId = useInput('', validateId);
   const loginPassword = useInput('', validatePassword);
   const { mutate: mutatePostLogin } = usePostLogin({
@@ -26,6 +26,12 @@ const LoginPage: NextPage = () => {
       setUserName(NAME);
       router.push('/');
     },
+  });
+
+  useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
+      router.push('/');
+    }
   });
 
   const isValidLogin = validateInputs([loginId, loginPassword]);

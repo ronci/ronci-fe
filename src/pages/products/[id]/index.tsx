@@ -1,8 +1,10 @@
 import type { NextPage } from 'next';
+import Image from 'next/image';
 import styled from 'styled-components';
 
 import EmptyContents from '../../../components/EmptyContents';
 import Header from '../../../components/Header';
+import { BLUR_DATA_URL } from '../../../constants';
 import useProductIdPage from './useProductsIdPage';
 
 const ProductDetailPage: NextPage = () => {
@@ -16,26 +18,30 @@ const ProductDetailPage: NextPage = () => {
     return null;
   }
 
-  const { product } = productData.data.data;
+  const {
+    product: { name, price, thumbnail },
+  } = productData.data.data;
 
   return (
     <>
       <Header />
-      <Thumbnail src={product.thumbnail ? product.thumbnail : '/defaultThumbnail.jpg'} />
+      <Image
+        src={thumbnail || '/defaultThumbnail.jpg'}
+        placeholder='blur'
+        blurDataURL={BLUR_DATA_URL}
+        width={420}
+        height={420}
+        alt=''
+      />
       <ProductInfoWrapper>
-        <Name>{product.name}</Name>
-        <Price>{product.price.toLocaleString()}원</Price>
+        <Name>{name}</Name>
+        <Price>{price.toLocaleString()}원</Price>
       </ProductInfoWrapper>
     </>
   );
 };
 
 export default ProductDetailPage;
-
-const Thumbnail = styled.img`
-  width: 100%;
-  height: 420px;
-`;
 
 const ProductInfoWrapper = styled.div`
   margin-top: 20px;

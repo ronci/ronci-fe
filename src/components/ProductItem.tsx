@@ -4,24 +4,23 @@ import { memo } from 'react';
 
 import { Product } from '../types/product';
 import Image from 'next/image';
+import { BLUR_DATA_URL } from '../constants';
 
 interface ProductItemProps {
   product: Product;
 }
 
-const BLUR_DATA_URL =
-  'data:image/gif;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNU0TT+DwACegGB2mW2wwAAAABJRU5ErkJggg==';
-
 const ProductItem = ({ product: { id, name, thumbnail, price } }: ProductItemProps) => {
   return (
     <Link href={`/products/${id}`}>
       <Container>
-        <Thumbnail
-          src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'}
+        <Image
+          src={thumbnail || '/defaultThumbnail.jpg'}
           placeholder='blur'
           blurDataURL={BLUR_DATA_URL}
           width={180}
           height={180}
+          alt=''
         />
         <Name>{name}</Name>
         <Price>{price.toLocaleString()}원</Price>
@@ -37,11 +36,6 @@ const Container = styled.div`
   margin-left: 20px;
   margin-top: 20px;
   cursor: pointer;
-`;
-
-const Thumbnail = styled(Image)`
-  width: 100%;
-  height: 180px;
 `;
 
 const Name = styled.div`

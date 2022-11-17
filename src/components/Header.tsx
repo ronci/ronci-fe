@@ -33,7 +33,7 @@ const LoginInfo = () => {
   );
 
   useEffect(() => {
-    if (userId) {
+    if (userId && userName === '') {
       refetchUserInfo();
     }
   }, [userId]);

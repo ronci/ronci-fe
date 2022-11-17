@@ -30,7 +30,11 @@ const useInfiniteScrollPage = () => {
     };
   }, []);
 
-  return { productListData, targetRef };
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return { productListData, targetRef, scrollToTop };
 };
 
 export default useInfiniteScrollPage;

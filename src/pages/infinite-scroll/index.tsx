@@ -5,8 +5,11 @@ import EmptyContents from '../../components/EmptyContents';
 import ProductList from '../../components/ProductList';
 import useInfiniteScrollPage from './useInfiniteScrollPage';
 
+import { BsTriangleFill } from 'react-icons/bs';
+import { FlexBox } from '../../components/@shared/FlexBox';
+
 const InfiniteScrollPage: NextPage = () => {
-  const { productListData, targetRef } = useInfiniteScrollPage();
+  const { productListData, targetRef, scrollToTop } = useInfiniteScrollPage();
 
   if (typeof productListData === 'undefined') {
     return null;
@@ -22,6 +25,9 @@ const InfiniteScrollPage: NextPage = () => {
     <Container>
       <ProductList products={products} />
       <div ref={targetRef} />
+      <ScrollToTop as='button' justifyContent='center' alignItems='center' onClick={scrollToTop}>
+        <BsTriangleFill size={20} color='#fff' />
+      </ScrollToTop>
     </Container>
   );
 };
@@ -33,4 +39,14 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0 20px 40px;
+`;
+
+const ScrollToTop = styled(FlexBox)`
+  position: fixed;
+  right: calc(50% - 193px);
+  bottom: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: black;
 `;

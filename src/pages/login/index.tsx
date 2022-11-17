@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../../components/Header';
 import Input from '../../components/@shared/Input';
 import useLoginPage from './useLoginPage';
 
@@ -9,21 +8,18 @@ const LoginPage: NextPage = () => {
   const { loginId, loginPassword, isValidLogin, login } = useLoginPage();
 
   return (
-    <>
-      <Header />
-      <Form onSubmit={login}>
-        <Input labelFor='loginId' labelName='아이디' inputType='text' {...loginId} />
-        <Input
-          labelFor='loginPassword'
-          labelName='비밀번호'
-          inputType='password'
-          {...loginPassword}
-        />
-        <LoginButton type='submit' disabled={!isValidLogin}>
-          로그인
-        </LoginButton>
-      </Form>
-    </>
+    <Form onSubmit={login}>
+      <Input labelFor='loginId' labelName='아이디' inputType='text' {...loginId} />
+      <Input
+        labelFor='loginPassword'
+        labelName='비밀번호'
+        inputType='password'
+        {...loginPassword}
+      />
+      <LoginButton type='submit' disabled={!isValidLogin}>
+        로그인
+      </LoginButton>
+    </Form>
   );
 };
 

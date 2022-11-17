@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import ProductList from '../../components/ProductList';
 import Pagination from '../../components/Pagination';
-import Header from '../../components/Header';
 import { findPageNumbers } from '../../utilities';
 import usePaginationPage from './usePaginationPage';
 import { PAGE_SIZE } from '../../requestAPI/constants';
@@ -32,19 +31,16 @@ const PaginationPage: NextPage = () => {
   }
 
   return (
-    <>
-      <Header />
-      <Container>
-        <ProductList products={products} />
-        <Pagination
-          currentPage={currentPage}
-          startPage={startPage}
-          endPage={endPage}
-          pageUnit={PAGE_UNIT}
-          totalPages={totalPages}
-        />
-      </Container>
-    </>
+    <Container>
+      <ProductList products={products} />
+      <Pagination
+        currentPage={currentPage}
+        startPage={startPage}
+        endPage={endPage}
+        pageUnit={PAGE_UNIT}
+        totalPages={totalPages}
+      />
+    </Container>
   );
 };
 

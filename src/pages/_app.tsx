@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import setupMSW from '../api/setup';
 import GlobalStyle from '../styles/GlobalStyle';
 import { UserNameProvider } from '../provider/UserNameProvider';
+import Header from '../components/Header';
+import { FlexBox } from '../components/@shared/FlexBox';
 
 setupMSW();
 
@@ -23,7 +25,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       <UserNameProvider>
         <GlobalStyle />
         <Background />
-        <Content>
+        <Content flexDirection='column'>
+          <Header />
           <Component {...pageProps} />
         </Content>
       </UserNameProvider>
@@ -41,7 +44,7 @@ const Background = styled.div`
   background-color: #f0f0f5;
 `;
 
-const Content = styled.div`
+const Content = styled(FlexBox)`
   width: 420px;
   min-height: 100%;
   margin: 0 auto;

@@ -3,7 +3,6 @@ import Image from 'next/image';
 import styled from 'styled-components';
 
 import EmptyContents from '../../../components/EmptyContents';
-import Header from '../../../components/Header';
 import { BLUR_DATA_URL } from '../../../constants';
 import useProductIdPage from './useProductsIdPage';
 
@@ -24,7 +23,6 @@ const ProductDetailPage: NextPage = () => {
 
   return (
     <>
-      <Header />
       <Image
         src={thumbnail || '/defaultThumbnail.jpg'}
         placeholder='blur'

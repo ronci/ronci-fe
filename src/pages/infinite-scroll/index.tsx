@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import styled from 'styled-components';
 import EmptyContents from '../../components/EmptyContents';
 
-import Header from '../../components/Header';
 import ProductList from '../../components/ProductList';
 import useInfiniteScrollPage from './useInfiniteScrollPage';
 
@@ -20,13 +19,10 @@ const InfiniteScrollPage: NextPage = () => {
   }
 
   return (
-    <>
-      <Header />
-      <Container>
-        <ProductList products={products} />
-        <div ref={targetRef} />
-      </Container>
-    </>
+    <Container>
+      <ProductList products={products} />
+      <div ref={targetRef} />
+    </Container>
   );
 };
 

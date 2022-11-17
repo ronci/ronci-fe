@@ -30,12 +30,19 @@ const GlobalStyle = createGlobalStyle`
     max-width: 100%;
   }
 
-  button,
-  [role='button'] {
+  button {
     border: 0;
     border-radius: 0;
     background: none;
     user-select: none;
+  }
+
+  button, [role='button'] {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
   }
 
   ul, ol {

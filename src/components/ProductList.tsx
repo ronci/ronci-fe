@@ -8,9 +8,11 @@ type ProductListProps = {
 };
 
 const ProductList = ({ products }: ProductListProps) => (
-  <Container>
+  <Container as='ul'>
     {products.map((product) => (
-      <ProductItem key={product.id} product={product} />
+      <li key={product.id}>
+        <ProductItem product={product} />
+      </li>
     ))}
   </Container>
 );

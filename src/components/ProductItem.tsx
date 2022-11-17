@@ -1,30 +1,41 @@
+import Link from 'next/link';
 import styled from 'styled-components';
+import { memo } from 'react';
 
 import { Product } from '../types/product';
+import Image from 'next/image';
+import { BLUR_DATA_URL } from '../constants';
 
-type ProductItemProps = {
+interface ProductItemProps {
   product: Product;
+}
+
+const ProductItem = ({ product: { id, name, thumbnail, price } }: ProductItemProps) => {
+  return (
+    <Link href={`/products/${id}`}>
+      <Container>
+        <Image
+          src={thumbnail || '/defaultThumbnail.jpg'}
+          placeholder='blur'
+          blurDataURL={BLUR_DATA_URL}
+          width={180}
+          height={180}
+          alt=''
+        />
+        <Name>{name}</Name>
+        <Price>{price.toLocaleString()}원</Price>
+      </Container>
+    </Link>
+  );
 };
 
-const ProductItem = ({ product: { name, thumbnail, price } }: ProductItemProps) => (
-  <Container>
-    <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} />
-    <Name>{name}</Name>
-    <Price>{price}</Price>
-  </Container>
-);
+export default memo(ProductItem);
 
-export default ProductItem;
-
-const Container = styled.a`
+const Container = styled.div`
   width: 180px;
   margin-left: 20px;
   margin-top: 20px;
-`;
-
-const Thumbnail = styled.img`
-  width: 100%;
-  height: 180px;
+  cursor: pointer;
 `;
 
 const Name = styled.div`

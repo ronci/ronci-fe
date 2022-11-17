@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import { memo } from 'react';
 
 import { Product } from '../types/product';
 import Image from 'next/image';
@@ -29,7 +30,7 @@ const ProductItem = ({ product: { id, name, thumbnail, price } }: ProductItemPro
   );
 };
 
-export default ProductItem;
+export default memo(ProductItem);
 
 const Container = styled.div`
   width: 180px;

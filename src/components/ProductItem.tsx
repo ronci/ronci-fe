@@ -2,20 +2,32 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import { Product } from '../types/product';
+import Image from 'next/image';
 
-type ProductItemProps = {
+interface ProductItemProps {
   product: Product;
-};
+}
 
-const ProductItem = ({ product: { id, name, thumbnail, price } }: ProductItemProps) => (
-  <Link href={`/products/${id}`}>
-    <Container>
-      <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} />
-      <Name>{name}</Name>
-      <Price>{price.toLocaleString()}원</Price>
-    </Container>
-  </Link>
-);
+const BLUR_DATA_URL =
+  'data:image/gif;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNU0TT+DwACegGB2mW2wwAAAABJRU5ErkJggg==';
+
+const ProductItem = ({ product: { id, name, thumbnail, price } }: ProductItemProps) => {
+  return (
+    <Link href={`/products/${id}`}>
+      <Container>
+        <Thumbnail
+          src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'}
+          placeholder='blur'
+          blurDataURL={BLUR_DATA_URL}
+          width={180}
+          height={180}
+        />
+        <Name>{name}</Name>
+        <Price>{price.toLocaleString()}원</Price>
+      </Container>
+    </Link>
+  );
+};
 
 export default ProductItem;
 
@@ -26,7 +38,7 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-const Thumbnail = styled.img`
+const Thumbnail = styled(Image)`
   width: 100%;
   height: 180px;
 `;

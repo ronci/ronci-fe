@@ -7,11 +7,16 @@ import Header from '../../components/Header';
 import { findPageNumbers } from '../../utilities';
 import usePaginationPage from './usePaginationPage';
 import { PAGE_SIZE } from '../../requestAPI/constants';
+import EmptyContents from '../../components/EmptyContents';
 
 const PAGE_UNIT = 5;
 
 const PaginationPage: NextPage = () => {
-  const { page, productListData } = usePaginationPage();
+  const { page, productListData, isProductListError } = usePaginationPage();
+
+  if (isProductListError) {
+    return <EmptyContents>존재하지 않는 페이지입니다.</EmptyContents>;
+  }
 
   if (typeof productListData === 'undefined') {
     return null;

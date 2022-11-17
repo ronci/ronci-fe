@@ -5,7 +5,11 @@ import { useGetProductList } from '../../requestAPI';
 const usePaginationPage = () => {
   const router = useRouter();
   const { page } = router.query;
-  const { data: productListData, refetch: refetchProductList } = useGetProductList(
+  const {
+    data: productListData,
+    refetch: refetchProductList,
+    isError: isProductListError,
+  } = useGetProductList(
     { page: Number(page) },
     {
       enabled: false,
@@ -19,7 +23,7 @@ const usePaginationPage = () => {
     refetchProductList();
   }, [page]);
 
-  return { page, productListData };
+  return { page, productListData, isProductListError };
 };
 
 export default usePaginationPage;

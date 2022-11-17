@@ -1,21 +1,43 @@
-import React from 'react';
 import styled from 'styled-components';
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
+import { PaginationProps } from './type';
+import usePagination from './usePagination';
 
-const Pagination = () => {
+const Pagination = ({ currentPage, startPage, endPage, pageUnit, totalPages }: PaginationProps) => {
+  const { pageArray, handleClickPageButton, handleClickChangePageSetButton } = usePagination({
+    startPage,
+    endPage,
+    pageUnit,
+  });
+
   return (
     <Container>
-      <Button disabled>
+      <Button
+        type='button'
+        onClick={() => handleClickChangePageSetButton(-1)}
+        disabled={startPage === 1}
+      >
         <VscChevronLeft />
       </Button>
       <PageWrapper>
-        {[1, 2, 3, 4, 5].map((page) => (
-          <Page key={page} selected={page === 1} disabled={page === 1}>
+        {pageArray.map((page) => (
+          <Page
+            type='button'
+            key={page}
+            value={page}
+            selected={page === currentPage}
+            onClick={handleClickPageButton}
+            disabled={page === currentPage}
+          >
             {page}
           </Page>
         ))}
       </PageWrapper>
-      <Button disabled={false}>
+      <Button
+        type='button'
+        onClick={() => handleClickChangePageSetButton(1)}
+        disabled={totalPages === endPage}
+      >
         <VscChevronRight />
       </Button>
     </Container>

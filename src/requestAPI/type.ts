@@ -1,3 +1,5 @@
+import { Product } from '../types/product';
+
 export interface ErrorResponse {
   error: {
     message: string;
@@ -33,13 +35,6 @@ export interface GetUserInfoResponse {
 
 export interface GetProductListParams {
   page: number;
-}
-
-interface Product {
-  id: string;
-  name: string;
-  thumbnail: string;
-  price: number;
 }
 
 export interface GetProductListResponse {

@@ -1,23 +1,12 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
 
-import Header from '../components/Header';
-import ProductList from '../components/ProductList';
-import useIntersect from '../hooks/useIntersect';
-import { useGetProductListInfinite } from '../requestAPI';
+import Header from '../../components/Header';
+import ProductList from '../../components/ProductList';
+import useInfiniteScrollPage from './useInfiniteScrollPage';
 
 const InfiniteScrollPage: NextPage = () => {
-  const {
-    data: productListData,
-    hasNextPage: hasNextProductListPage,
-    fetchNextPage: fetchNextProductListPage,
-  } = useGetProductListInfinite();
-  const targetRef = useIntersect<HTMLDivElement>((entry, observer) => {
-    if (hasNextProductListPage) {
-      fetchNextProductListPage();
-    }
-    observer.unobserve(entry.target);
-  });
+  const { productListData, targetRef } = useInfiniteScrollPage();
 
   if (typeof productListData === 'undefined') {
     return null;

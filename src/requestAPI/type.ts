@@ -35,6 +35,7 @@ export interface GetUserInfoResponse {
 
 export interface GetProductListParams {
   page: number;
+  size?: number;
 }
 
 export interface GetProductListResponse {

@@ -19,8 +19,8 @@ export const getUserInfo = async ({ userId }: GetUserInfoParams) => {
   return axios.get<GetUserInfoResponse>(`/users/${userId}`);
 };
 
-export const getProductList = async ({ page }: GetProductListParams) => {
-  return axios.get<GetProductListResponse>(`/products?page=${page}&size=${PAGE_SIZE.PRODUCT_LIST}`);
+export const getProductList = async ({ page, size }: GetProductListParams) => {
+  return axios.get<GetProductListResponse>(`/products?page=${page}&size=${size}`);
 };
 
 export const getProduct = async ({ productId }: GetProductParams) => {

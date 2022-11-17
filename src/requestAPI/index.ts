@@ -1,7 +1,14 @@
 import { AxiosResponse, AxiosError } from 'axios';
-import { UseMutationOptions, useMutation, UseQueryOptions, useQuery } from 'react-query';
+import {
+  UseMutationOptions,
+  useMutation,
+  UseQueryOptions,
+  useQuery,
+  UseInfiniteQueryOptions,
+  useInfiniteQuery,
+} from 'react-query';
 import { getProduct, getProductList, getUserInfo, postLogin } from './api';
-import { QUERY_KEYS } from './constants';
+import { PAGE_SIZE, QUERY_KEYS } from './constants';
 import {
   ErrorResponse,
   GetProductListParams,
@@ -37,15 +44,37 @@ export const useGetUserInfo = (
   );
 
 export const useGetProductList = (
-  { page }: GetProductListParams,
+  { page, size = PAGE_SIZE.PRODUCT_LIST }: GetProductListParams,
   options?: UseQueryOptions<AxiosResponse<GetProductListResponse>, AxiosError<ErrorResponse>>
 ) =>
   useQuery<AxiosResponse<GetProductListResponse>, AxiosError<ErrorResponse>>(
     [QUERY_KEYS.getProductList, page],
-    () => getProductList({ page }),
+    () => getProductList({ page, size }),
     {
       keepPreviousData: true,
       ...options,
+    }
+  );
+
+export const useGetProductListInfinite = (
+  options?: UseInfiniteQueryOptions<
+    AxiosResponse<GetProductListResponse>,
+    AxiosError<ErrorResponse>
+  >
+) =>
+  useInfiniteQuery<AxiosResponse<GetProductListResponse>, AxiosError<ErrorResponse>>(
+    QUERY_KEYS.getProductListInfinite,
+    ({ pageParam = 1 }) =>
+      getProductList({ page: pageParam, size: PAGE_SIZE.PRODUCT_LIST_INFINITE }),
+    {
+      ...options,
+      getNextPageParam: (firstPage, allPages) => {
+        const currentPage = allPages.length;
+        const { totalCount } = firstPage.data.data;
+        const totalPages = Math.ceil(totalCount / PAGE_SIZE.PRODUCT_LIST_INFINITE);
+
+        return currentPage < totalPages ? currentPage + 1 : undefined;
+      },
     }
   );
 

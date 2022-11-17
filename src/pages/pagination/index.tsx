@@ -27,6 +27,10 @@ const PaginationPage: NextPage = () => {
   const totalPages = Math.ceil(totalCount / PAGE_SIZE.PRODUCT_LIST);
   const { startPage, endPage } = findPageNumbers({ currentPage, pageUnit: PAGE_UNIT, totalPages });
 
+  if (products.length === 0) {
+    return <EmptyContents>아직 등록된 상품이 없습니다.</EmptyContents>;
+  }
+
   return (
     <>
       <Header />

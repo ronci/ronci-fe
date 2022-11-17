@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
+import EmptyContents from '../../components/EmptyContents';
 
 import Header from '../../components/Header';
 import ProductList from '../../components/ProductList';
@@ -13,6 +14,10 @@ const InfiniteScrollPage: NextPage = () => {
   }
 
   const products = productListData.pages.flatMap((page) => page.data.data.products);
+
+  if (products.length === 0) {
+    return <EmptyContents>아직 등록된 상품이 없습니다.</EmptyContents>;
+  }
 
   return (
     <>

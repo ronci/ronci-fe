@@ -9,13 +9,15 @@ export interface PostLoginPayload {
   password: string;
 }
 
+interface User {
+  ID: string;
+  NAME: string;
+}
+
 export interface PostLoginResponse {
   data: {
     accessToken: string;
-    user: {
-      ID: string;
-      NAME: string;
-    };
+    user: User;
   };
 }
 
@@ -25,10 +27,7 @@ export interface GetUserInfoParams {
 
 export interface GetUserInfoResponse {
   data: {
-    user: {
-      ID: string;
-      NAME: string;
-    };
+    user: User;
   };
 }
 

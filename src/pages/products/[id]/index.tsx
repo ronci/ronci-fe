@@ -1,12 +1,22 @@
 import type { NextPage } from 'next';
-import React from 'react';
 import styled from 'styled-components';
 
-import products from '../../api/data/products.json';
-import Header from '../../components/Header';
+import EmptyContents from '../../../components/EmptyContents';
+import Header from '../../../components/Header';
+import useProductIdPage from './useProductsIdPage';
 
 const ProductDetailPage: NextPage = () => {
-  const product = products[0];
+  const { productData, isProductError } = useProductIdPage();
+
+  if (isProductError) {
+    return <EmptyContents>존재하지 않는 상품입니다.</EmptyContents>;
+  }
+
+  if (typeof productData === 'undefined') {
+    return null;
+  }
+
+  const { product } = productData.data.data;
 
   return (
     <>

@@ -1,6 +1,7 @@
 export const QUERY_KEYS = {
   getUserInfo: 'getUserInfo',
   getProductList: 'getProductList',
+  getProduct: 'getProduct',
 };
 
 export const PAGE_SIZE = {

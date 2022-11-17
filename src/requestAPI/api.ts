@@ -3,6 +3,8 @@ import { PAGE_SIZE } from './constants';
 import {
   GetProductListParams,
   GetProductListResponse,
+  GetProductParams,
+  GetProductResponse,
   GetUserInfoParams,
   GetUserInfoResponse,
   PostLoginPayload,
@@ -19,4 +21,8 @@ export const getUserInfo = async ({ userId }: GetUserInfoParams) => {
 
 export const getProductList = async ({ page }: GetProductListParams) => {
   return axios.get<GetProductListResponse>(`/products?page=${page}&size=${PAGE_SIZE.PRODUCT_LIST}`);
+};
+
+export const getProduct = async ({ productId }: GetProductParams) => {
+  return axios.get<GetProductResponse>(`/products/${productId}`);
 };

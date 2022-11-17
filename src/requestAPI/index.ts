@@ -1,11 +1,13 @@
 import { AxiosResponse, AxiosError } from 'axios';
 import { UseMutationOptions, useMutation, UseQueryOptions, useQuery } from 'react-query';
-import { getProductList, getUserInfo, postLogin } from './api';
+import { getProduct, getProductList, getUserInfo, postLogin } from './api';
 import { QUERY_KEYS } from './constants';
 import {
   ErrorResponse,
   GetProductListParams,
   GetProductListResponse,
+  GetProductParams,
+  GetProductResponse,
   GetUserInfoParams,
   GetUserInfoResponse,
   PostLoginPayload,
@@ -45,4 +47,14 @@ export const useGetProductList = (
       keepPreviousData: true,
       ...options,
     }
+  );
+
+export const useGetProduct = (
+  { productId }: GetProductParams,
+  options?: UseQueryOptions<AxiosResponse<GetProductResponse>, AxiosError<ErrorResponse>>
+) =>
+  useQuery<AxiosResponse<GetProductResponse>, AxiosError<ErrorResponse>>(
+    [QUERY_KEYS.getProduct, productId],
+    () => getProduct({ productId }),
+    options
   );

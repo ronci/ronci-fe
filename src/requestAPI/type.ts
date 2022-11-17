@@ -49,3 +49,13 @@ export interface GetProductListResponse {
     totalCount: number;
   };
 }
+
+export interface GetProductParams {
+  productId: number;
+}
+
+export interface GetProductResponse {
+  data: {
+    product: Product;
+  };
+}

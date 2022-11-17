@@ -7,3 +7,4 @@
 
 - next/image를 이용한 skeleton UI
 - product가 등록되지 않아서 빈 배열이 response로 올 때 UI 구현
+- infinite-scroll 페이지에서 fixed button을 누르면 맨 위로 스크롤 되도록 구현
